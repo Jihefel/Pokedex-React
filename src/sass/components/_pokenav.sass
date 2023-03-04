@@ -1,0 +1,29 @@
+.PokeNav
+    background-color: $danger
+    height: 100vh
+    overflow: scroll
+.pokemon-list
+    display: flex
+    flex-wrap: wrap
+    padding: 0
+    width: 100%
+    a
+        text-decoration: none
+        color: white
+        padding: 6px 12px
+        border-radius: 10px
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+    button
+        flex-basis: 16.66%
+        border: none
+        border-radius: 10px
+        padding: 0
+        opacity: 1
+        &:hover
+            border-radius: 10px
+        .active
+            color: $black
+            background-color: #ef3f44

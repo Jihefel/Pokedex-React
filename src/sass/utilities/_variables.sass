@@ -1,11 +1,14 @@
 @import ~bootstrap/scss/_functions.scss
 @import ~bootstrap/scss/_variables.scss
 
+$public-url: 'public'
+
 // COLORS Sass
-$lightgrey: #dddddd
+$danger: #ec1d23
+$black: #261d1f
 
 // COLORS Bootstrap
-$custom-colors: ('lightgrey': #dddddd)
+$custom-colors: ('danger': #ec1d23, "black2" : #261d1f)
 
 // Merge the maps
 $theme-colors: map-merge($theme-colors, $custom-colors)
