@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   ButtonGroup,
   Button,
@@ -6,13 +6,19 @@ import {
   Form,
   InputGroup,
 } from "react-bootstrap";
-import React, { useState, useEffect } from 'react';
 import { AiOutlineSearch } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 
 function PokeSearch(props) {
 
     const inputSearch = useRef(null)
+    const navigate = useNavigate()
+    
+    useEffect(() => {
+      navigate(`/${props.regions[props.region]}`)
+    }, [props.region]);
+
 
     const handleChange = (e) => {
         props.handleFilter(e)
@@ -20,11 +26,11 @@ function PokeSearch(props) {
     
 
   return (
-    <ButtonToolbar className="my-3 mx-2 d-flex justify-content-center " aria-label="Toolbar with Button groups">
-      <ButtonGroup  aria-label="First group">
+    <ButtonToolbar className="my-4 mx-2 d-flex justify-content-center " aria-label="Toolbar with Button groups">
+      <ButtonGroup  aria-label="First group" className="w-100">
         <Form.Select aria-label="Default select example" className="me-3" onChange={handleChange}>
-            <option disabled>Trier par région</option>
-            <option value="0" className="fw-bold" >Toutes</option>
+            <option disabled>Trier par région  </option>
+            <option value="0" className="fw-bold">Toutes</option>
             <option value="1">Kanto</option>
             <option value="2">Johto</option>
             <option value="3">Hoenn</option>
@@ -37,6 +43,7 @@ function PokeSearch(props) {
         <form onSubmit={(e) => {e.preventDefault(); console.log(inputSearch.current.value)}} className="w-100">
             <InputGroup>
                 <Form.Control
+                    id="search-bar"
                     type="search"
                     placeholder="Rechercher"
                     aria-label="Input group example"
