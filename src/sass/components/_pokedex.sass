@@ -23,21 +23,33 @@
 
         100%
             opacity: 0
-
-.button-go-top
-    height: 40px
-    width: 40px
-    padding: 0
-    border-radius: 50%
-    background-color: transparent
-    display: flex
-    justify-content: center
-    border: none
+.buttons-bottom
     position: absolute
     bottom: 1%
     right: 42.5%
-    &:hover
-        background-color: $danger
-    img
-        pointer-events: none
-        width: inherit
+    display: flex
+    align-items: center
+    .button-no-sound
+        color: white
+        font-size: 2rem
+        position: relative
+        .volume
+            position: absolute
+            top: -5%
+            right: -10%
+            font-size: 1rem
+    .button-go-top, .button-no-sound
+        height: 40px
+        width: 40px
+        padding: 0
+        border-radius: 50%
+        background-color: transparent
+        display: flex
+        justify-content: center
+        align-items: center
+        border: none
+        &:hover
+            background-color: $danger
+        img
+            pointer-events: none
+            width: inherit

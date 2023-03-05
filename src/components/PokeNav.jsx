@@ -1,26 +1,31 @@
 import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
+import { MdNumbers } from "react-icons/md";
 
 
 export default function PokeNav(props) {
 
-  const handleClick = (pokemon) => {
+  
+  const handleClick = (poke) => {
     props.setLoadingInfos(true)
-    props.setSelectedPokemon(pokemon)
+    props.setSelectedPokemon(poke)
     setTimeout(() => {
       props.setLoadingInfos(false)
     }, 1000);
+
+    props.pokeSound()
+    
   }
   
   
   return (
-    <nav className="pokemon-list">
+    <nav className="pokemon-list pb-3">
       {props.pokemons.map((pokemon) => (
         <Button variant="danger" key={pokemon.id}>
           <NavLink variant="danger" to={`${pokemon.name}`} onClick={() => handleClick(pokemon)} >
-            <span className="text-black2">#{pokemon.id}</span>{" "}
-            <span>{pokemon.name}</span>
+            <small className="text-black2 d-flex align-items-center py-2"><MdNumbers/>{pokemon.id}</small>{" "}
+            <h6 className="pokename">{pokemon.name}</h6>
             <img src={pokemon.sprite} alt={pokemon.name} className="sprite" />
           </NavLink>
         </Button>

@@ -3,7 +3,7 @@ function Loading(props) {
   return (
     <div className={"d-flex flex-column justify-content-center align-items-center h-100" + (props.isLoading ? "" : " d-none")} >
       <div className="loading-title">
-          <h1>Loading</h1>
+          <h1 className="fw-bolder">LOADING</h1>
           <svg id="dots" height="30px" viewBox="0 0 132 58" version="1.1" xmlns="http://www.w3.org/2000/svg" >
               <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="dots" fill="#261d1f">

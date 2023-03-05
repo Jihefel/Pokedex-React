@@ -1,5 +1,6 @@
 .PokeNav
-    background-color: $danger
+    background: linear-gradient($danger 50%, #970000)
+    background-attachment: scroll
     height: 100vh
     overflow: scroll
     padding-left: 10px
@@ -16,16 +17,34 @@
         flex-direction: column
         justify-content: center
         align-items: center
+        &:active
+            background-color: #da0c13b7
+            transform: translateY(3px) perspective(3px)
+        .pokename
+            font-weight: normal
+        .text-black2
+            font-weight: 500
+            font-size: 0.9rem
     button
-        flex-basis: 16.66%
-        border: none
+        background-color: transparent
+        flex-basis: 20%
         border-radius: 10px
+        border: 1px solid #df1e25b7
         padding: 0
         opacity: 1
+        transform: perspective(20px)
         &:hover
+            background-color: #df1b1b
             border-radius: 10px
-        .active
-            color: $black
-            background-color: #ffffff
+            box-shadow: 0 0px 5px #00000044
+            transform: scale(1.1)
         .sprite
-            filter: drop-shadow(0 0 10px #0000008c)
+            filter: drop-shadow(0 0 2px #000000)
+            image-rendering: -webkit-optimize-contrast
+            image-rendering: crisp-edges
+            image-rendering: pixelated
+            image-rendering: optimize-contrast
+            image-rendering: optimize-speed
+        .active
+            background: radial-gradient( #0000001c, $danger)
+            border: 1px solid white

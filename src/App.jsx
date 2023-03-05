@@ -61,13 +61,15 @@ function App() {
     if (region === 0) {
       setPokemons(originalPokemons);
     } else {
-      const filteredPokemons = originalPokemons.filter(
+
+      const originalsCopy = [...originalPokemons]
+      const filteredPokemons = originalsCopy.filter(
         (pokemon) => parseInt(pokemon.apiGeneration) === region
       );
       setPokemons(filteredPokemons);
     }
     navigate(`/${regions[region]}`)
-  }, [region]);
+  }, [region, originalPokemons]);
   
   
   const handleFilter = (e) => {
@@ -83,13 +85,13 @@ function App() {
             path={`/${reg}`}
             key={index}
             element={
-              <Pokedex pokemons={pokemons} handleFilter={handleFilter} region={region} regions={regions} selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} pokeApiInfos={pokeApiInfos} loadingInfos={loadingInfos} setLoadingInfos={setLoadingInfos} isLoading={isLoading} />
+              <Pokedex pokemons={pokemons} handleFilter={handleFilter} originalPokemons={originalPokemons} region={region} regions={regions} selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} pokeApiInfos={pokeApiInfos} loadingInfos={loadingInfos} setLoadingInfos={setLoadingInfos} isLoading={isLoading} />
             }>  
             {pokemons.map((pokemon, index) => (
               <Route
               key={index}
-              path={`/${reg}/${pokemon.name}`}
-              element={<PokeInfos  pokemons={pokemons} selectedPokemon={selectedPokemon} loadingInfos={loadingInfos} pokeApiInfos={pokeApiInfos} setLoadingInfos={setLoadingInfos} />}
+              path={`${pokemon.name}`}
+              element={<PokeInfos  pokemons={pokemons} selectedPokemon={selectedPokemon} loadingInfos={loadingInfos} pokeApiInfos={pokeApiInfos} setLoadingInfos={setLoadingInfos} originalPokemons={originalPokemons} />}
               />
             ))}
           </Route>
