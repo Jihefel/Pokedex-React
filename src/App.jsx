@@ -6,12 +6,14 @@ import PokeSearch from "./components/PokeSearch";
 import Error from "./components/Error";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { getPokemons } from "./api/api";
+import { getPokemons, getInfos } from "./api/api";
+import axios from "axios";
 
 function App() {
   
   const [originalPokemons, setOriginalPokemons] = useState([]);
   const [pokemons, setPokemons] = useState([]);
+  const [pokeApiInfos, setPokeApiInfos] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [region, setRegion] = useState(0);
@@ -33,6 +35,27 @@ function App() {
       })
       .catch((error) => console.error(error));
   }, []);
+
+
+  useEffect(() => {
+    if (selectedPokemon !== null) {
+      getInfos()
+        .then((pokemons) => {
+          axios.get(pokemons.data.results[selectedPokemon.id-1].url)
+            .then((poke)=> {
+              setPokeApiInfos(poke.data);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [loadingInfos]);
+  
+
 
   useEffect(() => {
     if (region === 0) {
@@ -60,13 +83,13 @@ function App() {
             path={`/${reg}`}
             key={index}
             element={
-              <Pokedex pokemons={pokemons} handleFilter={handleFilter} region={region} regions={regions} selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} loadingInfos={loadingInfos} setLoadingInfos={setLoadingInfos} isLoading={isLoading} />
+              <Pokedex pokemons={pokemons} handleFilter={handleFilter} region={region} regions={regions} selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} pokeApiInfos={pokeApiInfos} loadingInfos={loadingInfos} setLoadingInfos={setLoadingInfos} isLoading={isLoading} />
             }>  
             {pokemons.map((pokemon, index) => (
               <Route
               key={index}
               path={`/${reg}/${pokemon.name}`}
-              element={<PokeInfos selectedPokemon={selectedPokemon} loadingInfos={loadingInfos} />}
+              element={<PokeInfos  pokemons={pokemons} selectedPokemon={selectedPokemon} loadingInfos={loadingInfos} pokeApiInfos={pokeApiInfos} setLoadingInfos={setLoadingInfos} />}
               />
             ))}
           </Route>

@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+
 
 export default function PokeNav(props) {
 
@@ -11,7 +13,7 @@ export default function PokeNav(props) {
     }, 1000);
   }
   
-
+  
   return (
     <nav className="pokemon-list">
       {props.pokemons.map((pokemon) => (

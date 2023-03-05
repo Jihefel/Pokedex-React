@@ -38,7 +38,7 @@ function Pokedex(props) {
     <Container fluid className={"Pokedex" + (props.isLoading ? " d-none" : "")}>
       <Row>
         <Col lg={7} className="PokeInfos">
-          <PokeInfos  selectedPokemon={props.selectedPokemon} loadingInfos={props.loadingInfos} />
+          <PokeInfos pokemons={props.pokemons} selectedPokemon={props.selectedPokemon} loadingInfos={props.loadingInfos} pokeApiInfos={props.pokeApiInfos} setLoadingInfos={props.setLoadingInfos} />
           <ScrollButton visible={visible} goTop={goTop} />
         </Col>
         <Col lg={5} className="pe-0 PokeNav" onScroll={handleScroll} ref={pokeNav} >

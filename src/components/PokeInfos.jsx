@@ -1,7 +1,9 @@
+import { Fragment } from "react";
 import { Card } from "react-bootstrap";
 
 function PokeInfos(props) {
   const selectedPokemon = props.selectedPokemon;
+  const selectedPokeApiInfos = props.pokeApiInfos
 
   const publicUrl = process.env.PUBLIC_URL;
 
@@ -30,7 +32,7 @@ function PokeInfos(props) {
   for (let index = 0; index < types.length; index++) {
     logos.push(publicUrl + "/assets/images/logo-types/" + types[index] + ".png");
   }
-
+  
   return (
   selectedPokemon !== null ? (
     <>
@@ -51,12 +53,45 @@ function PokeInfos(props) {
             </div>
       </Card.Header>
       <Card.Img variant="top" src={selectedPokemon.image} />
-      <Card.Body className="d-flex">
+      <Card.Body className="d-flex justify-content-between align-items-stretch">
         <div className="infos-left">
-          
+          <dl>
+            <dt>ID :</dt>
+            <dd>#{selectedPokemon.id}</dd>
+            <dt>Taille :</dt>
+            <dd>{(parseInt(selectedPokeApiInfos.height)/10).toFixed(1)}m</dd>
+            <dt>Poids :</dt>
+            <dd>{(parseInt(selectedPokeApiInfos.weight)/10).toFixed(1)}kg</dd>
+          </dl>
         </div>
         <div className="infos-right">
 
+            <fieldset>
+
+            <legend>Evolution{selectedPokemon.apiPreEvolution !== "none" && selectedPokemon.apiEvolutions.length !== 0 ? "s" : ""} :</legend>
+            {selectedPokemon.apiPreEvolution !== "none" ? (
+              <Fragment key={selectedPokemon.name}>
+              <dt>Précédente</dt>
+                <dd>
+                  {selectedPokemon.apiPreEvolution.name}
+                </dd>
+                  <img src={props.pokemons[selectedPokemon.apiPreEvolution.pokedexIdd-1].sprite} alt="" />
+            </Fragment>
+            ) : null}
+            {selectedPokemon.apiEvolutions.length !== 0 ? (
+              <>
+            <dt>Suivante :</dt>
+            {selectedPokemon.apiEvolutions.map((evolution, index) => (
+              <Fragment key={evolution.pokedexId}>
+                <dd key={index}>
+                  {evolution.name}
+                </dd>
+                  <img key={evolution.pokedexId} src={props.pokemons[evolution.pokedexId-1].sprite} alt="" />
+              </Fragment>
+            ))}
+            </>
+            ) : null}
+            </fieldset>
         </div>
       </Card.Body>
     </Card>
