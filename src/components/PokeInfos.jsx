@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Card, Carousel } from "react-bootstrap";
 import { GiBodyHeight, GiWeight } from "react-icons/gi";
 import { MdCatchingPokemon, MdNumbers } from "react-icons/md";
@@ -9,6 +9,7 @@ function PokeInfos(props) {
   const selectedPokeApiInfos = props.pokeApiInfos
   const originalPokemons = props.originalPokemons
 
+  const [index, setIndex] = useState(0)
 
   const publicUrl = process.env.PUBLIC_URL;
 
@@ -38,6 +39,14 @@ function PokeInfos(props) {
     logos.push(publicUrl + "/assets/images/logo-types/" + types[index] + ".png");
   }
   
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+
+  useEffect(() => {
+    setIndex(0)
+  }, [selectedPokemon]);
+
   return (
   selectedPokemon !== null ? (
     <>
@@ -58,27 +67,37 @@ function PokeInfos(props) {
             </div>
       </Card.Header>
       {/* <Card.Img variant="top" src={selectedPokemon.image} className={"pokeImg my-4" + ((parseInt(selectedPokemon.id)) === 133 ?  " w-50" : "")} /> */}
-      <Carousel fade>
-      <Carousel.Item className="text-center">
+      <Carousel fade activeIndex={index} onSelect={handleSelect}>
+      <Carousel.Item className="text-center" interval={3000}>
         <img
           src={selectedPokemon.image} 
           className={"pokeImg my-4" + ((parseInt(selectedPokemon.id)) === 133 ?  " w-50" : "")}
           alt={selectedPokemon.name + " default"}
         />
       </Carousel.Item>
-      <Carousel.Item className="text-center">
+      <Carousel.Item className="text-center" interval={3000}>
         <img
-          src={selectedPokeApiInfos.sprites.other.dream_world.front_default}
+          src={selectedPokeApiInfos.sprites?.other?.dream_world?.front_default}
           className={"pokeImg my-4" + ((parseInt(selectedPokemon.id)) === 133 ?  " w-50" : "")}
           alt={selectedPokemon.name + " dream_world"}
         />
       </Carousel.Item>
-      <Carousel.Item className="text-center">
+      <Carousel.Item className="text-center" interval={3000}>
         <img
-          src={selectedPokeApiInfos.sprites.other.home.front_default}
+          src={selectedPokeApiInfos.sprites?.other?.home?.front_default}
           className={"pokeImg my-4" + ((parseInt(selectedPokemon.id)) === 133 ?  " w-50" : "")}
           alt={selectedPokemon.name + " home"}
         />
+      </Carousel.Item>
+      <Carousel.Item className="text-center" interval={3000}>
+        <img
+          src={selectedPokeApiInfos.sprites?.other?.['official-artwork']?.front_shiny}
+          className={"pokeImg my-4" + ((parseInt(selectedPokemon.id)) === 133 ?  " w-50" : "")}
+          alt={selectedPokemon.name + " shiny"}
+        />
+        <Carousel.Caption>
+          <h3>Shiny</h3>
+        </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
       <Card.Body className="d-flex justify-content-between px-0">

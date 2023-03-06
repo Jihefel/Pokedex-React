@@ -14,10 +14,7 @@ function PokeSearch(props) {
 
     const inputSearch = useRef(null)
     const navigate = useNavigate()
-    
-    useEffect(() => {
-      navigate(`/${props.regions[props.region]}`)
-    }, []);
+
 
 
     const handleSelect = (e) => {

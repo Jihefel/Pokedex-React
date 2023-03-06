@@ -55,7 +55,7 @@ function App() {
           console.error(error);
         });
     }
-  }, [isLoading, selectedPokemon]);
+  }, [selectedPokemon, isLoading]);
   
 
 
@@ -112,7 +112,7 @@ useEffect(() => {
             element={
               <Pokedex pokemons={pokemons} handleFilter={handleFilter} originalPokemons={originalPokemons} region={region} regions={regions} selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} pokeApiInfos={pokeApiInfos} loadingInfos={loadingInfos} setLoadingInfos={setLoadingInfos} isLoading={isLoading} search={search}/>
             }>  
-            {pokemons.map((pokemon, index) => (
+            {originalPokemons.map((pokemon, index) => (
               <Route
               key={index}
               path={`${pokemon.name}`}
