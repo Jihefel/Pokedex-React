@@ -12,7 +12,7 @@ export default function PokeNav(props) {
     props.setSelectedPokemon(poke)
     setTimeout(() => {
       props.setLoadingInfos(false)
-    }, 1000);
+    }, 1500);
 
     props.pokeSound()
     

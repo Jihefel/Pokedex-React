@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Card, Dropdown, DropdownButton } from "react-bootstrap";
+import { Card, Carousel } from "react-bootstrap";
 import { GiBodyHeight, GiWeight } from "react-icons/gi";
 import { MdCatchingPokemon, MdNumbers } from "react-icons/md";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
@@ -57,7 +57,30 @@ function PokeInfos(props) {
                 ))}
             </div>
       </Card.Header>
-      <Card.Img variant="top" src={selectedPokemon.image} className=" pokeImg my-4" />
+      {/* <Card.Img variant="top" src={selectedPokemon.image} className={"pokeImg my-4" + ((parseInt(selectedPokemon.id)) === 133 ?  " w-50" : "")} /> */}
+      <Carousel fade>
+      <Carousel.Item className="text-center">
+        <img
+          src={selectedPokemon.image} 
+          className={"pokeImg my-4" + ((parseInt(selectedPokemon.id)) === 133 ?  " w-50" : "")}
+          alt={selectedPokemon.name + " default"}
+        />
+      </Carousel.Item>
+      <Carousel.Item className="text-center">
+        <img
+          src={selectedPokeApiInfos.sprites.other.dream_world.front_default}
+          className={"pokeImg my-4" + ((parseInt(selectedPokemon.id)) === 133 ?  " w-50" : "")}
+          alt={selectedPokemon.name + " dream_world"}
+        />
+      </Carousel.Item>
+      <Carousel.Item className="text-center">
+        <img
+          src={selectedPokeApiInfos.sprites.other.home.front_default}
+          className={"pokeImg my-4" + ((parseInt(selectedPokemon.id)) === 133 ?  " w-50" : "")}
+          alt={selectedPokemon.name + " home"}
+        />
+      </Carousel.Item>
+    </Carousel>
       <Card.Body className="d-flex justify-content-between px-0">
         <div className="infos-left px-4">
           <dl className="d-flex flex-column gap-4 pt-1 pb-3">
@@ -75,7 +98,7 @@ function PokeInfos(props) {
             </div>
           </dl>
         </div>
-        <div className="infos-right d-flex flex-column align-items-center">
+        <div className="infos-right d-flex flex-column align-items-center" style={(parseInt(selectedPokemon.id)) === 133 ? {width: "70%"} : {width: "60%"}}>
             <fieldset>
               <legend className="d-flex align-items-center gap-2 mb-3"><MdCatchingPokemon/>Evolution{selectedPokemon.apiPreEvolution !== "none" && selectedPokemon.apiEvolutions.length !== 0 ? "s" : ""} :</legend>
               { selectedPokemon.apiEvolutions.length === 0 && selectedPokemon.apiPreEvolution === "none" ? 

@@ -40,7 +40,7 @@ function PokeSearch(props) {
             <option value="7">Alola</option>
             <option value="8">Galar</option>
         </Form.Select>
-        <form onSubmit={(e) => props.searchSubmit(e)} className="w-100">
+        <form className="w-100">
             <InputGroup>
                 <Form.Control
                     id="search-bar"
@@ -50,10 +50,8 @@ function PokeSearch(props) {
                     aria-describedby="btnGroupAddon"
                     onChange={props.search}
                     ref={inputSearch}
+                    autoComplete="off"
                     />
-                <Button type="submit" id="btnGroupAddon" className="d-flex justify-content-center align-items-center" variant="outline-light">
-                    <AiOutlineSearch />
-                </Button>
             </InputGroup>
         </form>
       </ButtonGroup>

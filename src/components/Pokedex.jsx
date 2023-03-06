@@ -61,7 +61,7 @@ function Pokedex(props) {
         <Col lg={5} className="pe-0 PokeNav" onScroll={handleScroll} ref={pokeNav} >
           <>
             <img src={logoPokemon} alt="Logo Pokémon" className="img-fluid w-25 d-block mx-auto my-4"/>
-            <PokeSearch handleFilter={props.handleFilter} region={props.region} regions={props.regions} search={props.search} searchSubmit={(e) => props.searchSubmit(e)} />
+            <PokeSearch handleFilter={props.handleFilter} region={props.region} regions={props.regions} search={props.search} />
             <PokeNav pokemons={props.pokemons}  setSelectedPokemon={props.setSelectedPokemon} setLoadingInfos={props.setLoadingInfos} pokeSound={pokeSound} />
           </>
         </Col>

@@ -20,7 +20,6 @@ function App() {
   const [region, setRegion] = useState(0);
   const [loadingInfos, setLoadingInfos] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [searchValueSubmited, setSearchValueSubmited] = useState("");
 
   const navigate = useNavigate()
   
@@ -56,7 +55,7 @@ function App() {
           console.error(error);
         });
     }
-  }, [loadingInfos]);
+  }, [isLoading, selectedPokemon]);
   
 
 
@@ -100,34 +99,7 @@ useEffect(() => {
       setPokemons(pokemonSearched);
     }
     
-    if (searchValueSubmited !== "") {
-      let pokemonFound = newPokemons.find(pokemon => pokemon.name.toLowerCase() === searchValueSubmited.toLowerCase());
-      if (pokemonFound) {
-        setSearchValue("");
-        setSearchValueSubmited("");
-        setSelectedPokemon(pokemonFound);
-        setPokemons(pokeCopy);
-        navigate(`/${regions[region]}/${pokemonFound.name}`);
-        pokemonFound = false;
-      } else if (newPokemons !== originalPokemons) {
-        setPokemons(originalPokemons);
-      }
-      setLoadingInfos(true)
-      setTimeout(() => {
-        setLoadingInfos(false)
-      }, 1000);
-    }
-  }, [searchValue, searchValueSubmited]);
-  
-  
-
-  
-  
-
-  const searchSubmit = (e) => {
-    e.preventDefault();
-    setSearchValueSubmited(e.target[0].value);
-  }
+  }, [searchValue]);
   
 
     return (
@@ -138,7 +110,7 @@ useEffect(() => {
             path={`/${reg}`}
             key={index}
             element={
-              <Pokedex pokemons={pokemons} handleFilter={handleFilter} originalPokemons={originalPokemons} region={region} regions={regions} selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} pokeApiInfos={pokeApiInfos} loadingInfos={loadingInfos} setLoadingInfos={setLoadingInfos} isLoading={isLoading} search={search} searchSubmit={(e) => searchSubmit(e)}/>
+              <Pokedex pokemons={pokemons} handleFilter={handleFilter} originalPokemons={originalPokemons} region={region} regions={regions} selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} pokeApiInfos={pokeApiInfos} loadingInfos={loadingInfos} setLoadingInfos={setLoadingInfos} isLoading={isLoading} search={search}/>
             }>  
             {pokemons.map((pokemon, index) => (
               <Route
