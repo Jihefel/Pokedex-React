@@ -17,10 +17,10 @@ function PokeSearch(props) {
     
     useEffect(() => {
       navigate(`/${props.regions[props.region]}`)
-    }, [props.region]);
+    }, []);
 
 
-    const handleChange = (e) => {
+    const handleSelect = (e) => {
         props.handleFilter(e)
     }
     
@@ -28,7 +28,7 @@ function PokeSearch(props) {
   return (
     <ButtonToolbar className="my-4 mx-2 d-flex justify-content-center " aria-label="Toolbar with Button groups">
       <ButtonGroup  aria-label="First group" className="w-100">
-        <Form.Select aria-label="Default select example" className="me-3" onChange={handleChange}>
+        <Form.Select aria-label="Default select example" className="me-3" onChange={handleSelect}>
             <option disabled>Trier par région  </option>
             <option value="0" className="fw-bold">Toutes</option>
             <option value="1">Kanto</option>
@@ -40,7 +40,7 @@ function PokeSearch(props) {
             <option value="7">Alola</option>
             <option value="8">Galar</option>
         </Form.Select>
-        <form onSubmit={(e) => {e.preventDefault(); console.log(inputSearch.current.value)}} className="w-100">
+        <form onSubmit={(e) => props.searchSubmit(e)} className="w-100">
             <InputGroup>
                 <Form.Control
                     id="search-bar"
@@ -48,6 +48,7 @@ function PokeSearch(props) {
                     placeholder="Rechercher"
                     aria-label="Input group example"
                     aria-describedby="btnGroupAddon"
+                    onChange={props.search}
                     ref={inputSearch}
                     />
                 <Button type="submit" id="btnGroupAddon" className="d-flex justify-content-center align-items-center" variant="outline-light">
