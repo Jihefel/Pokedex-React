@@ -14,29 +14,29 @@ function PokeInfos(props) {
   const publicUrl = process.env.PUBLIC_URL;
 
   const types = [
-    "acier",
-    "combat",
-    "dragon",
-    "eau",
-    "électrik",
-    "fée",
-    "feu",
-    "glace",
-    "insecte",
-    "normal",
-    "plante",
-    "poison",
-    "psy",
-    "roche",
-    "sol",
-    "spectre",
-    "ténèbres",
-    "vol",
-  ];
+    { name: "acier", color: "#B8B8D0" },
+    { name: "combat", color: "#F08030" },
+    { name: "dragon", color: "#7038F8" },
+    { name: "eau", color: "#6890F0" },
+    { name: "électrik", color: "#F8D030" },
+    { name: "fée", color: "#EE99AC" },
+    { name: "feu", color: "#F08030" },
+    { name: "glace", color: "#98D8D8" },
+    { name: "insecte", color: "#A8B820" },
+    { name: "normal", color: "#A8A878" },
+    { name: "plante", color: "#78C850" },
+    { name: "poison", color: "#A040A0" },
+    { name: "psy", color: "#F85888" },
+    { name: "roche", color: "#B8A038" },
+    { name: "sol", color: "#E0C068" },
+    { name: "spectre", color: "#705898" },
+    { name: "ténèbres", color: "#705848" },
+    { name: "vol", color: "#A890F0" },
+  ]
 
   let logos = [];
   for (let index = 0; index < types.length; index++) {
-    logos.push(publicUrl + "/assets/images/logo-types/" + types[index] + ".png");
+    logos.push(publicUrl + "/assets/images/logo-types/" + types[index].name + ".png");
   }
   
   const handleSelect = (selectedIndex, e) => {
@@ -53,20 +53,20 @@ function PokeInfos(props) {
   <div className={props.loadingInfos ? "pokeball" : "pokeball d-none"}>
     <div className="pokeball__button"></div>
   </div>
-    <Card text="white" className={(props.loadingInfos ? "d-none" : "") + " px-4 py-3 rounded-4 shadow-lg"}>
+    <Card text="white" className={(props.loadingInfos ? "d-none" : "") + " px-4 py-3 rounded-4 shadow-lg"} style={{backgroundColor:  types.find((type) => selectedPokemon.apiTypes[selectedPokemon.apiTypes.length > 1 ? 1 : 0].name.toLowerCase() === type.name)?.color || "transparent"
+      }}>
       <Card.Header>
         <h1>{selectedPokemon.name}</h1>
             <div className="types d-flex gap-3 justify-content-center my-3">
                 {types.map(type =>
                     selectedPokemon.apiTypes.map((apiType, idx) => (
-                        apiType.name.toLowerCase() === type ? (
-                            <img key={idx} src={apiType.name.toLowerCase() === type ? logos[types.indexOf(type)] : ""} alt={type}/>
+                        apiType.name.toLowerCase() === type.name ? (
+                            <img key={idx} src={apiType.name.toLowerCase() === type.name ? logos[types.indexOf(type)] : ""} alt={type.name}/>
                         ) : null
                     )
                 ))}
             </div>
       </Card.Header>
-      {/* <Card.Img variant="top" src={selectedPokemon.image} className={"pokeImg my-4" + ((parseInt(selectedPokemon.id)) === 133 ?  " w-50" : "")} /> */}
       <Carousel fade activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item className="text-center" interval={3000}>
         <img
