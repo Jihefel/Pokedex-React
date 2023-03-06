@@ -3,6 +3,8 @@ import { Card, Carousel } from "react-bootstrap";
 import { GiBodyHeight, GiWeight } from "react-icons/gi";
 import { MdCatchingPokemon, MdNumbers } from "react-icons/md";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
+import { BsStars } from "react-icons/bs";
+
 
 function PokeInfos(props) {
   const selectedPokemon = props.selectedPokemon;
@@ -14,24 +16,24 @@ function PokeInfos(props) {
   const publicUrl = process.env.PUBLIC_URL;
 
   const types = [
-    { name: "acier", color: "#B8B8D0" },
-    { name: "combat", color: "#F08030" },
-    { name: "dragon", color: "#7038F8" },
-    { name: "eau", color: "#6890F0" },
-    { name: "électrik", color: "#F8D030" },
-    { name: "fée", color: "#EE99AC" },
-    { name: "feu", color: "#F08030" },
-    { name: "glace", color: "#98D8D8" },
-    { name: "insecte", color: "#A8B820" },
-    { name: "normal", color: "#A8A878" },
-    { name: "plante", color: "#78C850" },
-    { name: "poison", color: "#A040A0" },
-    { name: "psy", color: "#F85888" },
-    { name: "roche", color: "#B8A038" },
-    { name: "sol", color: "#E0C068" },
-    { name: "spectre", color: "#705898" },
-    { name: "ténèbres", color: "#705848" },
-    { name: "vol", color: "#A890F0" },
+    { name: "acier", color: "#60a2b950" },
+    { name: "combat", color: "#ff810050" },
+    { name: "dragon", color: "#7038F850" },
+    { name: "eau", color: "#2481f050" },
+    { name: "électrik", color: "#fac10050" },
+    { name: "fée", color: "#ef71f050" },
+    { name: "feu", color: "#e7232450" },
+    { name: "glace", color: "#3dd9ff50" },
+    { name: "insecte", color: "#A8B82050" },
+    { name: "normal", color: "#a0a2a050" },
+    { name: "plante", color: "#3da22450" },
+    { name: "poison", color: "#A040A050" },
+    { name: "psy", color: "#ef3f7a50" },
+    { name: "roche", color: "#B8A03850" },
+    { name: "sol", color: "#92501b50" },
+    { name: "spectre", color: "#70589850" },
+    { name: "ténèbres", color: "#00084850" },
+    { name: "vol", color: "#A890F050" },
   ]
 
   let logos = [];
@@ -43,6 +45,10 @@ function PokeInfos(props) {
     setIndex(selectedIndex);
   };
 
+
+  const bgColor1 = types.find((type) => selectedPokemon?.apiTypes[0].name.toLowerCase() === type.name)?.color || "transparent";
+  const bgColor2 = types.find((type) => selectedPokemon?.apiTypes[1]?.name.toLowerCase() === type.name)?.color || bgColor1;
+
   useEffect(() => {
     setIndex(0)
   }, [selectedPokemon]);
@@ -53,8 +59,7 @@ function PokeInfos(props) {
   <div className={props.loadingInfos ? "pokeball" : "pokeball d-none"}>
     <div className="pokeball__button"></div>
   </div>
-    <Card text="white" className={(props.loadingInfos ? "d-none" : "") + " px-4 py-3 rounded-4 shadow-lg"} style={{backgroundColor:  types.find((type) => selectedPokemon.apiTypes[selectedPokemon.apiTypes.length > 1 ? 1 : 0].name.toLowerCase() === type.name)?.color || "transparent"
-      }}>
+    <Card text="white" className={(props.loadingInfos ? "d-none" : "") + " px-4 py-3 rounded-4 shadow-lg"} style={{background: `linear-gradient(${bgColor2},${bgColor1})`}}>
       <Card.Header>
         <h1>{selectedPokemon.name}</h1>
             <div className="types d-flex gap-3 justify-content-center my-3">
@@ -95,8 +100,8 @@ function PokeInfos(props) {
           className={"pokeImg my-4" + ((parseInt(selectedPokemon.id)) === 133 ?  " w-50" : "")}
           alt={selectedPokemon.name + " shiny"}
         />
-        <Carousel.Caption>
-          <h3>Shiny</h3>
+        <Carousel.Caption className="pb-0">
+          <h5 className="m-0"><BsStars/>{" "}Shiny</h5>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
