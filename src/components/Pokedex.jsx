@@ -1,10 +1,10 @@
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useRef, useState } from 'react';
+import { Col, Container, Row } from "react-bootstrap";
+import BottomButtons from "./BottomButtons";
+import Loading from "./Loading";
+import PokeInfos from "./PokeInfos";
 import PokeNav from "./PokeNav";
 import PokeSearch from "./PokeSearch";
-import PokeInfos from "./PokeInfos";
-import Loading from "./Loading";
-import BottomButtons from "./BottomButtons";
-import React, { useState, useEffect, useRef } from 'react';
 
 
 function Pokedex(props) {
